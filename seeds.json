@@ -1,0 +1,10 @@
+{
+  "_comment": "Seed schedule. Base seeds 42-46 give the 5 independent repetitions per condition; the second equal-weight block uses an offset so its repetitions are not identical to block 1.",
+  "base_seeds": [42, 43, 44, 45, 46],
+  "block_seed_offset": 100,
+  "pure_style_seeds": [42, 43, 44, 45, 46],
+  "derivation": {
+    "condition_seed": "seed = base_seeds[rep_index] + block_seed_offset * block_index",
+    "note": "rep_index in 0..4; block_index is 0 for asymmetric conditions and for equal-weight block 1, 1 for equal-weight block 2."
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "_comment": "Fusion pairing and ratio schedule for the 140-image benchmark. Mirrors paper section 2.3 and Table 1.",
+  "taxonomy": {
+    "2x2_cultural_origin_x_feature": {
+      "ink_wash":   {"origin": "East Asian", "feature": "texture-dominant"},
+      "ukiyo_e":    {"origin": "East Asian", "feature": "color-dominant"},
+      "cyberpunk":  {"origin": "Western",    "feature": "color-dominant"},
+      "baroque":    {"origin": "Western",    "feature": "texture-dominant"}
+    },
+    "prompt_conditioned_no_culture": ["minimalist"]
+  },
+  "primary_pairs": [
+    {"id": "ink_cyber",      "style_a": "ink_wash", "style_b": "cyberpunk", "cross_taxonomy": true},
+    {"id": "ukiyo_baroque",  "style_a": "ukiyo_e",  "style_b": "baroque",   "cross_taxonomy": true},
+    {"id": "cyber_baroque",  "style_a": "cyberpunk","style_b": "baroque",   "cross_taxonomy": false},
+    {"id": "ink_baroque",    "style_a": "ink_wash", "style_b": "baroque",   "cross_taxonomy": true}
+  ],
+  "generalization_pairs": [
+    {"id": "ink_minimal",    "style_a": "ink_wash", "style_b": "minimalist", "cross_taxonomy": false},
+    {"id": "ukiyo_minimal",  "style_a": "ukiyo_e",  "style_b": "minimalist", "cross_taxonomy": false}
+  ],
+  "asymmetric_ratios": [[0.3, 0.7], [0.7, 0.3]],
+  "equal_weight": {
+    "ratio": [0.5, 0.5],
+    "n_blocks": 2
+  },
+  "repetitions_per_condition": 5,
+  "pure_style_controls": {"styles": ["ink_wash", "ukiyo_e", "cyberpunk", "baroque", "minimalist"], "images_per_style": 4},
+  "expected_counts": {
+    "asymmetric_primary": 40,
+    "asymmetric_generalization": 20,
+    "equal_weight_primary": 40,
+    "equal_weight_generalization": 20,
+    "pure_style_controls": 20,
+    "total": 140
+  }
+}

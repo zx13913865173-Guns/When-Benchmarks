@@ -1,0 +1,41 @@
+# SDXL Base 1.0 LoRA training config — style: Chinese ink wash (东亚 / 纹理主导)
+# Run with:
+#   accelerate launch sdxl_train_network.py --config_file configs/ink_wash.toml
+# Requires kohya-ss/sd-scripts (SDXL branch). Parameters match the paper (§2.2).
+
+[general]
+enable_bucket = true          # 允许多分辨率分桶
+bucket_no_upscale = false
+
+[model]
+pretrained_model_name_or_path = "stabilityai/stable-diffusion-xl-base-1.0"
+v2 = false
+v_parameterization = false
+
+[training]
+output_dir = "../outputs/lora/ink_wash"
+output_name = "ink_wash_sdxl"
+max_train_steps = 3000        # 论文: steps = 3000
+train_batch_size = 2          # 论文: batch size = 2
+learning_rate = 1e-4          # 论文: learning rate = 1e-4
+optimizer_type = "AdamW"      # 论文: optimizer = AdamW
+lr_scheduler = "constant"
+mixed_precision = "fp16"
+seed = 42
+save_every_n_steps = 1000
+save_model_as = "safetensors"
+max_grad_norm = 1.0
+
+[network]
+network_module = "networks.lora"
+network_dim = 32              # 论文: rank = 32
+network_alpha = 1.0           # 论文: alpha = 1.0
+network_train_unet_only = false
+
+[datasets]
+resolution = 1024
+[[datasets.subsets]]
+image_dir = "../data/train/ink_wash"
+num_repeats = 1
+caption_extension = ".txt"
+class_tokens = "ink wash painting, xuan paper, monochrome brush strokes"
